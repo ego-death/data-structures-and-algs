@@ -66,3 +66,27 @@ function noRepeat(str) {
   }
   return maxLength;
 }
+
+//get the first negative number of each subarray of size k
+
+function firstNeg(arr, k) {
+  let windowStart = 0, windowEnd = 0
+  const keepNeg = [];
+  let ans = [];
+  for(windowEnd=0;windowEnd<arr.length;windowEnd++) {
+    if(arr[windowEnd] < 0) keepNeg.push(arr[windowEnd]);
+    if(windowEnd >= k-1) {
+      if(keepNeg.length>0) {
+        ans.push(keepNeg[0]);
+      if(keepNeg[0] == arr[windowStart]) {
+        keepNeg.shift();
+      }
+    }
+    else ans.push(0);
+      windowStart+=1;
+    }
+  }
+  return ans;
+}
+
+console.log(firstNeg([12,-1,-7,8,-15,30,16,28], 3));
