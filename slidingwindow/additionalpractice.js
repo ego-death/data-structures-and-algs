@@ -58,4 +58,55 @@ function f3 (arr, k) {
     }
 }
 
-console.log(f3([ 2, 1, 2, 3, 2, 1, 4, 5 ], 5))
+// console.log(f3([ 2, 1, 2, 3, 2, 1, 4, 5 ], 5))
+
+//Find the smallest window in a string containing all characters of another string
+// Input: string = “this is a test string”, pattern = “tist” 
+// Output: Minimum window is “t stri” 
+// Explanation: “t stri” contains all the characters of pattern.
+// Input: string = “geeksforgeeks”, pattern = “ork” 
+// Output: Minimum window is “ksfor”
+
+//SOLUTION: 
+/* BRUTE FORCE: I'm thinking run two nested for loops in which the outer loop fixes on an index and the inner loop searches all 
+indexes after it till it matches the pattern. then test for minLength and change if necessary. repeat for all other indices.
+WINDOW METHOD: get window to run until it matches all characters. run inner while loop to reduce size of window until minimum length 
+is achieved and matched condition remains true */
+
+
+function f4(str, pattern) {
+    let windowEnd = 0, windowStart = 0, charFreq = {}, subStrIndex = 0, minLength = Infinity, matched = 0;
+    for(const char of pattern) {
+        if(!charFreq[char]) {
+            charFreq[char] = 0;
+        }
+        charFreq[char] += 1;
+    }
+    for(let windowEnd=0;windowEnd<str.length;windowEnd++) {
+        let rightChar = str[windowEnd];
+        if(rightChar in charFreq) {
+            charFreq[rightChar] -= 1;
+            if(charFreq[rightChar] == 0) {
+                matched++;
+            }
+        }
+        while(matched == pattern.length) {
+            console.log(windowEnd);
+            if(minLength > windowEnd - windowStart + 1) {
+                minLength = windowEnd - windowStart + 1;
+                subStrIndex = windowStart;
+            }
+            let leftChar = str[windowStart];
+            if(leftChar in charFreq) {
+                if(charFreq[leftChar] == 0) {
+                    matched -= 1;
+                }
+                charFreq[leftChar] += 1;
+            }
+            windowStart++;
+        }
+    }
+    return minLength==Infinity?'':str.substring(subStrIndex, subStrIndex + minLength);
+}
+
+console.log(f4('geeksforgeeks', 'ork'));
