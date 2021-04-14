@@ -13,7 +13,7 @@ function longestSubstring(str, k) {
         if (windowEnd - windowStart + 1 - maxRepeatCount > k) {
             let leftChar = str[windowStart];
             //delete first element
-            freqMap[rightChar] -= 1;
+            freqMap[leftChar] -= 1;
             windowStart += 1;
         }
         maxLength = Math.max(maxLength, windowEnd - windowStart + 1);
