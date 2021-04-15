@@ -109,4 +109,69 @@ function f4(str, pattern) {
     return minLength==Infinity?'':str.substring(subStrIndex, subStrIndex + minLength);
 }
 
-console.log(f4('geeksforgeeks', 'ork'));
+// console.log(f4('geeksforgeeks', 'ork'));
+
+//get a list of all anagrams in a string with a given pattern
+
+function anagrams(str, pattern) {
+    //INPUT: str, pattern
+    //ALGORITHM: SLIDING WINDOW
+    //OUTPUT: list (array) of the relevant anagrams
+
+    //note: the size of the anagram must always be equal to the size of the pattern.
+    let windowEnd = 0, windowStart = 0, result = [], charFreq = {}, matched = 0;
+    //first we need to store the frequency of the letters in the given pattern
+    for(const char of pattern) {
+        if(!charFreq[char]) charFreq[char] = 0;
+        charFreq[char] += 1;
+    }
+    for(;windowEnd<str.length;windowEnd++) {
+        let rightChar = str[windowEnd];
+
+        if(rightChar in charFreq) {
+            charFreq[rightChar] -= 1;
+            if(charFreq[rightChar] == 0) {
+                matched += 1;
+            }
+        }
+        if(matched == Object.keys(charFreq).length) {
+            result.push(str.substring(windowStart, windowStart + pattern.length));
+        }
+
+        if(windowEnd >= pattern.length - 1) {
+            let leftChar = str[windowStart];
+            if(leftChar in charFreq) {
+                if(charFreq[leftChar] == 0) {
+                    matched -= 1;
+                }
+                charFreq[leftChar] += 1;
+            }
+            windowStart++;
+        }
+    }
+    return result.length?result:'No anagrams';
+}
+
+// console.log(anagrams('debabcafacb', 'abc'));
+
+
+//new problem: 
+// You are given an array of integers nums, there is a sliding window of size k which is moving from the very left of the array to the very right. You can only see the k numbers in the window. Each time the sliding window moves right by one position.
+// Return the max sliding window.
+
+var maxSlidingWindow = function(nums, k) {
+    let windowEnd = 0, windowStart = 0, result = [], window = [];
+    for(;windowEnd<nums.length;windowEnd++) {
+        console.log(window);
+        window.push(nums[windowEnd]);
+        if(windowEnd >= k-1) {
+            result.push(Math.max(...window));
+            window.shift()
+        }
+    }
+    return result;
+};
+
+console.log(maxSlidingWindow([1,3,-1,-3,5,3,6,7], 3));
+
+ 
