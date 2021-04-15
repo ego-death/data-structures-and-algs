@@ -172,6 +172,6 @@ var maxSlidingWindow = function(nums, k) {
     return result;
 };
 
-console.log(maxSlidingWindow([1,3,-1,-3,5,3,6,7], 3));
+// console.log(maxSlidingWindow([1,3,-1,-3,5,3,6,7], 3));
 
  
