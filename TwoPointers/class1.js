@@ -45,3 +45,50 @@ function removeDuplicates(arr) {
      }
      return nextElement;
  } //O(n) time | O(1) space where n is the length of elements in the array.
+
+ function find(arr, sum) {
+     let hashMap = {};
+     for(let i=0;i<arr.length;i++) {
+         if(!(arr[i] in hashMap)) {
+             hashMap[i] = 1;
+         }
+         if(hashMap[sum - arr[i]]) return [arr[i], sum - arr[i]];
+     }
+     return false;
+ } // [5,3,3,9,4,6]
+
+//  console.log(find([5,3,3,9,4,6], 7));
+
+//square each value in sorted array and return the output in sorted order
+
+// function square(arr) {
+//     //[-4,-3,1,2,5]
+//     let left =
+// }
+
+/**
+ * @param {string} s
+ * @return {number}
+ */
+ var lengthOfLongestSubstring = function(s) {
+    let windowEnd = 0, windowStart = 0, charFreq = {}, maxLength = 0, hit = false;
+    for(windowEnd=0;windowEnd<s.length;++windowEnd) {
+        let endChar = s[windowEnd];
+        if(!(endChar in charFreq)) {
+            charFreq[endChar] = 0;
+        }
+        charFreq[endChar]++;
+        if(charFreq[endChar] > 1) {
+            hit = true;
+            console.log(windowEnd, windowStart);
+            maxLength = Math.max(maxLength, windowEnd - windowStart + 1); 
+            charFreq = {};
+            charFreq[endChar] = 1;
+            windowStart = windowEnd;
+        }
+    }
+    return !hit?s.length:maxLength;
+};
+
+
+console.log(lengthOfLongestSubstring('ab'));
