@@ -60,4 +60,13 @@ function longest(str) {
     return currentMax;
   }
 
-  console.log(longest('nab'));
+//   console.log(longest('nab'));
+
+function longest_palindrome(s) {
+    //..
+    let windowStart = 0, windowEnd = 0, maxPal = "", window = "";
+    for(;windowEnd<s.length;++windowEnd) {
+        window += str[windowEnd];
+    }
+
+}
