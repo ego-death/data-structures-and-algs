@@ -9,3 +9,22 @@ function longest_palindrome(s) {
         }
     }
 }
+
+function reverseFizzBuzz(array) {
+  // your code
+  let fizz=0, buzz=0;
+  for(let i=0;i<array.length;i++) {
+    let el = array[i];
+    console.log(el=='Fizz');
+    if(el == 'Fizz' && !fizz) fizz = i+1;
+    else if(el =='Buzz' && !buzz) buzz = i+1
+    else if(el == 'FizzBuzz' && !fizz && !buzz) return [i+1, i+1];
+    else if(el =='FizzBuzz' && !buzz) return [fizz, (i+1)/fizz];
+    else if(el == 'FizzBuzz' && !fizz) return [(i+1)/buzz, buzz];
+    
+    if(fizz && buzz) return [fizz,buzz];
+  }
+}
+
+console.log('Hi');
+console.log(reverseFizzBuzz([1,2,"Fizz",4,"Buzz"]));
