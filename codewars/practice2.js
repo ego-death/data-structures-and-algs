@@ -26,5 +26,20 @@ function reverseFizzBuzz(array) {
   }
 }
 
-console.log('Hi');
-console.log(reverseFizzBuzz([1,2,"Fizz",4,"Buzz"]));
+// console.log('Hi');
+// console.log(reverseFizzBuzz([1,2,"Fizz",4,"Buzz"]));
+
+var twoSum = function(nums, target) {
+  let numsMap = {};
+  for(let i=0;i<nums.length;i++) {
+    let complement = target - nums[i];
+    console.log(numsMap);
+    if(complement in numsMap) {
+      return [i, numsMap[complement]];
+    } else {
+      numsMap[nums[i]] = i;
+    }
+  }
+};
+
+console.log(twoSum([2,3,4], 6));
