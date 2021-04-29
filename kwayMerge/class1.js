@@ -43,3 +43,4 @@ function merge_lists(lists) {
 
   return resultHead;
 } //O(N * logK) time | O(K) space where N is number of elements in all K arrays and K is number of arrays 
+console.log('test commit');
