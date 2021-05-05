@@ -25,3 +25,26 @@ let solveKnapsack = function(profits, weights, capacity) {
     }
     return knapsackRecursive(profits, weights, capacity, 0);
 }
+
+//a better solution
+let solveKnapsack = function(profits, weights, capacity) {
+    const n = profits.length;
+    if(capacity <= 0 || n == 0 || weights.length) return 0;
+    const dp = Array(capacity + 1).fill(0);
+    //if we have only one weight, we will take it if it is not more than the capacity
+    for(let c = 0; c <= capacity; c++) {
+        if(weights[0] <= c) dp[c] = profits[0];
+    }
+    //process all sub-arrays for all the capacities
+    for(let i=1;i<n;i++) {
+        for(let c=capacity;c>=0;--c) {
+            let profit1 = 0, profit2 = 0;
+            //include the item, if it is nore more than the capacity
+            if(weights[i] <= c) profit1 = profits[i] + dp[c - weights[i]];
+            //exclude hte item
+            profit2 = dp[c];
+            //take maximum
+            dp[c] = Math.max(profit1, profit2);
+        }
+    }
+}
