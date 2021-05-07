@@ -60,13 +60,8 @@ function longest(str) {
     return currentMax;
   }
 
-//   console.log(longest('nab'));
+//   wide-mouthed frog
 
-function longest_palindrome(s) {
-    //..
-    let windowStart = 0, windowEnd = 0, maxPal = "", window = "";
-    for(;windowEnd<s.length;++windowEnd) {
-        window += str[windowEnd];
-    }
-
-}
+function mouthSize(animal) {
+    return animal.toLowerCase() == 'alligator' ? 'small' : 'wide';
+  }
